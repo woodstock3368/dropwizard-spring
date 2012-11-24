@@ -2,7 +2,7 @@ package com.hmsonline.dropwizard.spring;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.yammer.dropwizard.config.Configuration;

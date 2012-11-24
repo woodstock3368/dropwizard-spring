@@ -2,6 +2,7 @@ package com.hmsonline.dropwizard.spring;
 
 import java.util.List;
 
+import com.yammer.dropwizard.config.Bootstrap;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,15 +17,16 @@ import com.yammer.metrics.core.HealthCheck;
 public class SpringService extends Service<SpringServiceConfiguration> {
 
     public static void main(String[] args) throws Exception {
-        new SpringService("dropwizard-spring").run(args);
-    }
-
-    protected SpringService(String serviceName) {
-        super(serviceName);
+        new SpringService().run(args);
     }
 
     @Override
-    protected void initialize(SpringServiceConfiguration configuration, Environment environment) {
+    public void initialize(Bootstrap<SpringServiceConfiguration> springServiceConfigurationBootstrap) {
+        springServiceConfigurationBootstrap.setName("dropwizard-spring");
+    }
+
+    @Override
+    public void run(SpringServiceConfiguration configuration, Environment environment) {
         SpringConfiguration config = configuration.getSpring();
 
         ApplicationContext parentCtx = this.initSpringParent();
